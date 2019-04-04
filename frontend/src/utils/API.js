@@ -14,8 +14,19 @@ export function getInitialData () {
     getPosts(),
   ]).then(([categories, posts]) => ({
     categories,
-    posts,
-  }))
+    posts
+  }));
+}
+
+export function getInitialComments (posts) {
+  const postsId = Object.keys(posts);
+
+  return Promise.all(postsId.map(id => // map they keys and return an array of promisses
+    getPostComments(id)
+  )).then(data => data.reduce((obj, comment, i) => {
+      obj[postsId[i]] = comment;
+      return obj;
+    }, {})); // It's generating something like this -> postId: { cooment id: comment, comment id: comment}
 }
 
 // CATEGORIES
@@ -90,7 +101,11 @@ export const getPostComments = ( id ) =>
   fetch(`${api}/posts/${id}/comments`, {
     method: 'GET',
     headers,
-  }).then(res => res.json());
+  }).then(res => res.json())
+    .then(data => data.reduce((obj, comment) => {
+      obj[comment.id] = comment;
+      return obj;
+    }, {})); // Want a {id:post} obj on store
 
 // COMMENTS
 

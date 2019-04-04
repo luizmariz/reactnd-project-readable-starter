@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   state = {
     text: '',
+    userAutentication: false
   };
 
   handleChange = e => {
@@ -20,15 +22,24 @@ class Login extends Component {
     e.preventDefault();
 
     const { text } = this.state;
-    const { dispatch, history } = this.props;
+    const { dispatch } = this.props;
 
     dispatch(setAuthedUser(text));
-    history.push('/');
+
+    this.setState(() => ({
+      userAutentication: true,
+    }));
 
   }
 
   render() {
-    const { text } = this.state;
+    const { text, userAutentication } = this.state;
+
+    if (userAutentication) {
+      return (
+        <Redirect from='/login' to='/'/> // Don't want to push the login on history, so i'm using it
+      );
+    }
 
     return (
       <div className='flex-container'>
