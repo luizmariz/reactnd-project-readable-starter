@@ -39,7 +39,7 @@ class Login extends Component {
           <h3>Login</h3>
           <input
             className="user-input"
-            placeholder="Select your username"
+            placeholder="Type any name to begin"
             value={text}
             onChange={this.handleChange}
           />
