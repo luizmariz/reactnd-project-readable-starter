@@ -1,16 +1,21 @@
-import React from 'react'
-import Filters from './Filters';
-import Dashboard from './Dashboard';
+import React from 'react';
+import Post from './Post';
 
-const Feed = () => {
-  return (
-    <div>
-      <div className="feed center">
-        <Filters />
-        <Dashboard />
-      </div>
-    </div>
-  );
+const Feed = props => {
+	const { posts } = props;
+
+	return (
+		<div>
+			<h3 className="center">Your feed</h3>
+			<ul className="post-list">
+				{posts.map(post => (
+					<li key={post.id}>
+						<Post post={post}/>
+					</li>
+				))}
+			</ul>
+		</div>
+	);
 };
 
 export default Feed;

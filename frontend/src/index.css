@@ -154,7 +154,7 @@ div {
   padding-left: 0;
 }
 
-.feed-separator {
+.dashboard-separator {
   border-right: 1px solid #00000023;
   height: 100vh;
   margin-top: 10px;
@@ -162,7 +162,7 @@ div {
   margin-right: 10px;
 }
 
-.feed {
+.dashboard {
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -196,6 +196,7 @@ div {
 
 .post-list {
   margin-top: 20px;
+  width: 600px;
 }
 
 .post-icon {
@@ -227,6 +228,7 @@ div {
 }
 
 .post-icons {
+  margin-top: 15px;
   display: flex;
   align-items: flex-end;
   flex-direction: row;

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import  Login  from './Login';
-import  Feed  from './Feed';
 import Nav from './Nav';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +22,8 @@ class App extends Component {
       <Router>
         <div className="container">
           <Nav />
-          <Route exact path="/" component={Feed} />
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/:category" component={Dashboard} />
         </div>
       </Router>
     );
