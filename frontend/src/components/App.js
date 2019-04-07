@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import  Login  from './Login';
 import  Feed  from './Feed';
+import Nav from './Nav';
 
 class App extends Component {
   componentDidMount() {
@@ -12,14 +13,16 @@ class App extends Component {
 
   render() {
     const { authedUser } = this.props;
+
+    if (!authedUser) {
+      return <Login />; // Fake front login, just to set your authedUser
+    }
+
     return (
       <Router>
-        <div>
-          <Route exact path="/" render={() => authedUser === null
-            ? (<Redirect to="/login"/>)
-            : (<Feed/>)
-          }/>
-          <Route path='/login' component={Login} />
+        <div className="container">
+          <Nav />
+          <Route exact path="/" component={Feed} />
         </div>
       </Router>
     );

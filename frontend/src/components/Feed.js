@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Filters from './Filters';
+import Dashboard from './Dashboard';
 
-class Feed extends Component {
-  render() {
-    return (
-      <div>
-        Feed
+const Feed = () => {
+  return (
+    <div>
+      <div className="feed center">
+        <Filters />
+        <Dashboard />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Feed;
