@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { formatDate } from '../utils/helpers';
 import { FaArrowUp, FaArrowDown, FaRegCommentAlt } from 'react-icons/fa';
+import { exact, string, number, bool } from 'prop-types';
 
 class Post extends Component {
   state = {
@@ -58,6 +59,20 @@ class Post extends Component {
       </div>
     );
   }
+};
+
+Post.propTypes = {
+  post: exact({
+    id: string,
+    timestamp: number.isRequired,
+    category: string,
+    deleted: bool,
+    title: string.isRequired,
+    author: string.isRequired,
+    body: string.isRequired,
+    voteScore: number.isRequired,
+    commentCount: number.isRequired,
+  }),
 };
 
 export default Post;

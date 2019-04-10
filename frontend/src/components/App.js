@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import  Login  from './Login';
 import Nav from './Nav';
 import Dashboard from './Dashboard';
+import HandlePost from './HandlePost';
 
 class App extends Component {
   componentDidMount() {
@@ -12,7 +13,7 @@ class App extends Component {
   }
 
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, categories } = this.props;
 
     if (!authedUser) {
       return <Login />; // Fake front login, just to set your authedUser
@@ -22,16 +23,20 @@ class App extends Component {
       <Router>
         <div className="container">
           <Nav />
-          <Route exact path="/" component={Dashboard} />
-          <Route exact path="/:category" component={Dashboard} />
+          <Route exact path="/new" component={HandlePost} />
+          <Route exact path={`/:category(${categories.join('|')})?`} component={Dashboard} />
         </div>
       </Router>
     );
   }
 }
 
-function mapStateToProps ({ authedUser }) {
-  return { authedUser };
+function mapStateToProps ({ authedUser, categories }) {
+  return {
+    authedUser,
+    categories: Object.keys(categories)
+      .map(key => categories[key].name),
+  };
 }
 
 export default connect(mapStateToProps)(App);

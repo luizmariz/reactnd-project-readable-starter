@@ -1,5 +1,6 @@
 import React from 'react';
 import Post from './Post';
+import { array } from 'prop-types';
 
 const Feed = props => {
 	const { posts } = props;
@@ -16,6 +17,10 @@ const Feed = props => {
 			</ul>
 		</div>
 	);
+};
+
+Feed.propTypes = {
+	posts: array.isRequired,
 };
 
 export default Feed;

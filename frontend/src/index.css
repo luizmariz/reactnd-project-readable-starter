@@ -246,3 +246,48 @@ div {
   margin-left: -9px;
   margin-right: 9px;
 }
+
+.title-input {
+  padding: 10px;
+  border: 1px solid #0000004a;
+  cursor: text;
+  background: #fff;
+  font-size: 16px;
+  width: 300px;
+  position: relative;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.post-form div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-form-body {
+  display: flex;
+  width: 530px;
+  height: 130px;
+  border: 1px solid #0000004a;
+  cursor: text;
+  background: #fff;
+  position: relative;
+  border-radius: 5px;
+  margin-top: -2px;
+}
+
+.post-form-body textarea {
+  position: absolute;
+  font-size: 16px;
+  width: 510px;
+  height: 110px;
+  border-color: transparent;
+  resize: none;
+}

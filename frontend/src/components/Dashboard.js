@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Filters from './Filters';
 import Feed from './Feed';
+import Select from './Select';
 
 class Dashboard extends Component {
   state = {
     sortBy: "score",
   }
 
-  handleSortChange = e => {
-		const value = e.target.value;
-
+  handleSortChange = value => {
 		this.setState(() => ({
 			sortBy: value,
 		}));
 	}
 
-	handleCategoryChange = e => {
-    const value = e.target.value;
+	handleCategoryChange = value => {
     this.props.history.push(`/${value === "all" ? "" : value}`);
   }
 
@@ -38,28 +35,34 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { categories, match } = this.props;
+    const { categories, category } = this.props;
     const { sortBy } = this.state;
-
-    const path = match.params.category ? match.params.category : "all";
 
     return (
       <div className="dashboard center">
-        <Filters
-          categories={categories}
-          category={path}
-          sortBy={sortBy}
-          handleCategoryChange={this.handleCategoryChange}
-          handleSortChange={this.handleSortChange}
-        />
-        <Feed posts={this.handlePosts(path)}/>
+        <div className="filter">
+          <Select
+            value={sortBy}
+            onChange={this.handleSortChange}
+            items={[ "score", "date" ]}
+          />
+          <Select
+            value={category}
+            onChange={this.handleCategoryChange}
+            items={[ "all", ...categories ]}
+          />
+        </div>
+        <Feed posts={this.handlePosts(category)}/>
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts, categories }) {
+function mapStateToProps({ posts, categories }, props) {
+  const { category } = props.match.params;
+
 	return {
+    category: category ? category : "all",
     posts: Object.keys(posts)
       .map(key => posts[key]),
 
