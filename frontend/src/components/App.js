@@ -6,6 +6,8 @@ import  Login  from './Login';
 import Nav from './Nav';
 import Dashboard from './Dashboard';
 import HandlePost from './HandlePost';
+import PostPage from './PostPage';
+import HandleComment from './HandleComment';
 
 class App extends Component {
   componentDidMount() {
@@ -23,8 +25,10 @@ class App extends Component {
       <Router>
         <div className="container">
           <Nav />
-          <Route exact path="/new" component={HandlePost} />
+          <Route exact path="/new-post" component={HandlePost} />
           <Route exact path={`/:category(${categories.join('|')})?`} component={Dashboard} />
+          <Route exact strict path="/:category/:post_id" component={PostPage} />
+          <Route exact path="/:category/:parent_id/new-comment" component={HandleComment} />
         </div>
       </Router>
     );

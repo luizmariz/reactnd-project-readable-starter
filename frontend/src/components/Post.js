@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { formatDate } from '../utils/helpers';
 import { FaArrowUp, FaArrowDown, FaRegCommentAlt } from 'react-icons/fa';
 import { exact, string, number, bool } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Post extends Component {
   state = {
@@ -37,7 +38,7 @@ class Post extends Component {
     const { post } = this.props;
 
     return (
-      <div className="post">
+      <Link to={`/${post.category}/${post.id}`} className="post">
         <h3>{post.title}</h3>
         <span className="post-info">by @{post.author} at {formatDate(post.timestamp)}</span>
         <span className="post-body">{post.body}</span>
@@ -56,7 +57,7 @@ class Post extends Component {
             <span>{post.commentCount}</span>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 };

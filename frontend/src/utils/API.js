@@ -65,8 +65,7 @@ export const newPost = (title, body, author, category ) =>
       author,
       category
     })
-  }).then(res => res.json())
-    .then(data => data);
+  }).then(res => res.json());
 
 // Use upVote or downVote
 export const votePost = ( string, id ) =>

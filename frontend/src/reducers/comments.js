@@ -1,4 +1,4 @@
-import { RECEIVE_COMMENTS } from '../actions/comments';
+import { RECEIVE_COMMENTS, CREATE_COMMENT } from '../actions/comments';
 
 export default function posts (state = {}, action) {
   switch(action.type) {
@@ -7,6 +7,14 @@ export default function posts (state = {}, action) {
         ...state,
         ...action.comments
       };
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        [action.comment.parentId]: {
+          ...state[action.comment.parentId],
+          [action.comment.id]: action.comment
+        }
+      }
     default:
       return state;
   }

@@ -14,7 +14,7 @@ const Nav = (props) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/new' exact activeClassName='active'>
+          <NavLink to='/new-post' exact activeClassName='active'>
             New post
           </NavLink>
         </li>

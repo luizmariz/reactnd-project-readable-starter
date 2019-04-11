@@ -25,6 +25,11 @@ div {
   background-color: transparent;
 }
 
+textarea,
+input[type=text] {
+    font-family:Arial;
+}
+
 /* App classes*/
 
 .container {
@@ -45,6 +50,7 @@ div {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
   background: #fff;
+  outline: none;
 }
 
 .user-input {
@@ -61,26 +67,41 @@ div {
 }
 
 ::placeholder {
-  color:#00000033;
+  color:#00000056;
   opacity: 1;
 }
 
-.btn {
+.btn, .btn-comment {
   text-transform: uppercase;
   margin: 15px auto;
   padding: 10px;
   border: 1px solid #0000004a;
   cursor: pointer;
-  background: #fff;
+  background: transparent;
   font-size: 16px;
   width: 250px;
   position: relative;
+  outline: none;
+  color: #000000c0;
 }
 
-.btn:hover {
+.btn:disabled {
+  color: #00000065;
+}
+
+.btn:hover, .btn-comment:hover {
   border-color: #00000080;
   text-decoration: none;
   background: #d3d3d321;
+}
+
+.btn-comment {
+  margin-top: 50px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
 .center {
@@ -96,6 +117,7 @@ div {
 .nav {
   margin: -10px;
   padding: 10px 100px;
+  margin-bottom: 20px;
 }
 
 .select {
@@ -108,10 +130,11 @@ div {
   position: relative;
   display: flex;
   align-items: center;
+  border-radius: 5px;
 }
 
-.select:hover {
-  background-color: #fff;;
+.select:hover, .title-input:hover, .post-form-body:hover {
+  background-color: #fff;
 }
 
 .select select {
@@ -124,18 +147,7 @@ div {
   height: 100%;
   appearance:none;
   cursor: pointer;
-}
-
-.s1 {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 30px;
-}
-
-.s2 {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 88px;
+  outline: none;
 }
 
 .dropdown-icon {
@@ -179,7 +191,6 @@ div {
 .post {
   padding-left: 20px;
   padding-bottom: 20px;
-  border-radius: 5px;
   cursor: pointer;
   width: 590px;
   display: flex;
@@ -194,40 +205,72 @@ div {
   box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.13);
 }
 
-.post-list {
+.comment {
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border-bottom: 1px solid #0000003b;
+}
+
+.post-list, .comment-list {
   margin-top: 20px;
   width: 600px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .post-icon {
   font-size: 20px;
-  color: #697784a8;
+  color: #697784cb;
   margin-right: 20px;
 }
 
-.post-icon-filled {
+.comment-icon {
+  font-size: 17px;
+  color: #697784cb;
+  margin-right: 20px;
+}
+
+.post-icon-filled, .comment-icon-filled {
   font-size: 20px;
   color: #6f00d6e3;
   margin-right: 20px;
 }
 
-.post-icon:hover {
+.post-icon:hover, .comment-icon:hover {
   color: #6f00d6e3;
   cursor: pointer;
 }
 
-.post-info {
+.post-info, .comment-info {
   margin-top: -15px;
   font-size: 15px;
   color: #969696;
 }
 
 .post-body {
+  font-size: 18px;
   margin-top: 20px;
   margin-bottom: 20px;
+  word-wrap: break-word;
+  padding-right: 15px;
 }
 
-.post-icons {
+.comment-body {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  word-wrap: break-word;
+  padding-right: 15px;
+}
+
+.post-icons, .comment-icons {
   margin-top: 15px;
   display: flex;
   align-items: flex-end;
@@ -242,7 +285,14 @@ div {
 
 .post-icons span {
   font-size: 18px;
-  color: #697784a8;
+  color: #697784cb;
+  margin-left: -9px;
+  margin-right: 9px;
+}
+
+.comment-icons span {
+  font-size: 16px;
+  color: #697784cb;
   margin-left: -9px;
   margin-right: 9px;
 }
@@ -251,12 +301,13 @@ div {
   padding: 10px;
   border: 1px solid #0000004a;
   cursor: text;
-  background: #fff;
+  background: transparent;
   font-size: 16px;
-  width: 300px;
+  width: 510px;
   position: relative;
   border-radius: 5px;
-  margin-right: 10px;
+  outline: none;
+  margin-bottom: 15px;
 }
 
 .post-form {
@@ -280,7 +331,8 @@ div {
   background: #fff;
   position: relative;
   border-radius: 5px;
-  margin-top: -2px;
+  background-color: transparent;
+  margin-bottom: 20px;
 }
 
 .post-form-body textarea {
@@ -290,4 +342,14 @@ div {
   height: 110px;
   border-color: transparent;
   resize: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.form-select .select{
+  width: 530px;
+}
+
+.form-select .select .dropdown-icon {
+  margin-left: 500px;
 }

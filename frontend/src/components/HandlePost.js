@@ -14,8 +14,10 @@ class HandlePost extends Component {
     e.preventDefault();
 
     const { title, category, body } = this.state;
+    const { dispatch, history } = this.props;
 
-    handleCreatePost(title, category, body);
+    history.push("/");
+    dispatch(handleCreatePost(title, category, body));
   }
 
   handleTitleChange = e => {
@@ -51,19 +53,19 @@ class HandlePost extends Component {
           className="post-form center"
           onSubmit={this.handleSubmit}
         >
-          <div>
-            <input
-              value={title}
-              className="title-input"
-              placeholder="Title and category select"
-              onChange={this.handleTitleChange}
-            />
+          <div className="form-select">
             <Select
               value={category}
               items={categories}
               onChange={this.handleCategoryChange}
             />
           </div>
+          <input
+            value={title}
+            className="title-input"
+            placeholder="Title"
+            onChange={this.handleTitleChange}
+          />
           <div className="post-form-body center">
             <textarea
               value={body}
@@ -73,9 +75,9 @@ class HandlePost extends Component {
           </div>
           <button
             className="btn"
-            disabled={title === "" && body === ""}
+            disabled={title === "" || body === ""}
           >
-            CREATE
+            SUBMIT
           </button>
         </form>
       </div>
