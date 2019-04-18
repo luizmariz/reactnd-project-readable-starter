@@ -1,4 +1,7 @@
-import { RECEIVE_COMMENTS, CREATE_COMMENT } from '../actions/comments';
+import {
+  RECEIVE_COMMENTS,
+  CREATE_COMMENT
+} from '../actions/comments';
 
 export default function posts (state = {}, action) {
   switch(action.type) {

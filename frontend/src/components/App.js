@@ -25,9 +25,10 @@ class App extends Component {
       <Router>
         <div className="container">
           <Nav />
-          <Route exact path="/new-post" component={HandlePost} />
           <Route exact path={`/:category(${categories.join('|')})?`} component={Dashboard} />
-          <Route exact strict path="/:category/:post_id" component={PostPage} />
+          <Route exact path="/:category/:post_id" component={PostPage} />
+          <Route exact path="/new-post" component={HandlePost} />
+          <Route exact path="/:category/:post_id/edit" component={HandlePost} />
           <Route exact path="/:category/:parent_id/new-comment" component={HandleComment} />
         </div>
       </Router>

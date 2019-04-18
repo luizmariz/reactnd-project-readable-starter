@@ -104,6 +104,11 @@ input[type=text] {
   flex-direction: column;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -352,4 +357,11 @@ input[type=text] {
 
 .form-select .select .dropdown-icon {
   margin-left: 500px;
+}
+
+.config {
+  align-self: flex-end;
+  margin-right: 55vh;
+  margin-bottom: 40px;
+  margin-top: -10px;
 }
