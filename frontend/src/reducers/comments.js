@@ -1,6 +1,8 @@
 import {
   RECEIVE_COMMENTS,
-  CREATE_COMMENT
+  CREATE_COMMENT,
+  UPDATE_COMMENT_CONTENT,
+  DELETE_COMMENT
 } from '../actions/comments';
 
 export default function posts (state = {}, action) {
@@ -17,6 +19,22 @@ export default function posts (state = {}, action) {
           ...state[action.comment.parentId],
           [action.comment.id]: action.comment
         }
+      }
+    case UPDATE_COMMENT_CONTENT:
+      return {
+        ...state,
+        [action.comment.parentId]: {
+          ...state[action.comment.parentId],
+          [action.comment.id]: {
+            ...state[action.comment.parentId][action.comment.id],
+            body: action.comment.body
+          }
+        }
+      }
+    case DELETE_COMMENT:
+      delete state[action.comment.parentId][action.comment.id];
+      return {
+        ...state
       }
     default:
       return state;

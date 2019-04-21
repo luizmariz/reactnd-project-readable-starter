@@ -4,6 +4,7 @@ import Post from './Post';
 import Comment from './Comment';
 import { FaRegTrashAlt, FaRegEdit } from 'react-icons/fa';
 import { handleDeletePost } from '../actions/posts';
+import { handleDeleteComment } from '../actions/comments';
 
 class PostPage extends Component {
 
@@ -12,7 +13,7 @@ class PostPage extends Component {
 
     const { post, history } = this.props;
 
-    history.push(`${post.id}/new-comment`);
+    history.push(`${post.id}/comments/new`);
   }
 
   editPost = e => {
@@ -33,6 +34,23 @@ class PostPage extends Component {
     history.push('/');
   }
 
+  editComment = (e, id) => {
+    e.preventDefault();
+
+    const { post, history } = this.props;
+
+    history.push(`${post.id}/${id}/edit`);
+  }
+
+  deleteComment = (e, id) => {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+
+    dispatch(handleDeleteComment(id));
+
+  }
+
   render() {
     const { post, comments, authedUser } = this.props;
 
@@ -41,9 +59,15 @@ class PostPage extends Component {
 
         { post.author === authedUser &&
 
-          <div className="config row">
-            <FaRegTrashAlt className="post-icon" onClick={this.deletePost}/>
-            <FaRegEdit className="post-icon" onClick={this.editPost} />
+          <div className="post-config row">
+            <FaRegTrashAlt
+              className="post-icon"
+              onClick={this.deletePost}
+            />
+            <FaRegEdit
+              className="post-icon"
+              onClick={this.editPost}
+            />
           </div>
 
         }
@@ -57,9 +81,27 @@ class PostPage extends Component {
         </button>
         <ul className="comment-list">
           {comments.map(comment => (
+
             <li key={comment.id}>
-              <Comment comment={comment} />
+              <div className="row">
+                <Comment comment={comment} />
+
+                { comment.author === authedUser &&
+                  <div className="comment-config row">
+                    <FaRegTrashAlt
+                      className="post-icon"
+                      onClick={ e => this.deleteComment(e, comment.id) }
+                      />
+                    <FaRegEdit
+                      className="post-icon"
+                      onClick={ e => this.editComment(e, comment.id) }
+                    />
+                  </div>
+                }
+
+              </div>
             </li>
+
           ))}
         </ul>
       </div>

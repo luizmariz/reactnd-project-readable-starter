@@ -137,20 +137,20 @@ export const voteComment = ( string, id ) =>
   }).then(res => res.json());
 
 export const updateComment = ( body, id ) =>
-  fetch(`${api}/posts/${id}`, {
+  fetch(`${api}/comments/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      timestamp: Date.name(),
+      timestamp: Date.now(),
       body
     })
   }).then(res => res.json());
 
-export const deleteComment = ( id ) =>
-  fetch(`${api}/posts/${id}`, {
+export const deleteCommentById = ( id ) =>
+  fetch(`${api}/comments/${id}`, {
     method: 'DELETE',
     headers
   }).then(res => res.json());

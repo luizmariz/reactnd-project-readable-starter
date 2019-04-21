@@ -359,9 +359,16 @@ input[type=text] {
   margin-left: 500px;
 }
 
-.config {
+.post-config {
   align-self: flex-end;
   margin-right: 55vh;
   margin-bottom: 40px;
   margin-top: -10px;
+}
+
+.comment-config {
+  align-self: flex-end;
+  margin-left: -80px;
+  font-size: 16px;
+  margin-bottom: 95px;
 }

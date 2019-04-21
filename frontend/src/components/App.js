@@ -29,7 +29,7 @@ class App extends Component {
           <Route exact path="/:category/:post_id" component={PostPage} />
           <Route exact path="/new-post" component={HandlePost} />
           <Route exact path="/:category/:post_id/edit" component={HandlePost} />
-          <Route exact path="/:category/:parent_id/new-comment" component={HandleComment} />
+          <Route exact path="/:category/:parent_id/:comment_id/:mode" component={HandleComment} />
         </div>
       </Router>
     );

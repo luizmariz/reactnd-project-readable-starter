@@ -29,11 +29,11 @@ class HandlePost extends Component {
     const { dispatch, history, post } = this.props;
 
     if (post) {
-      history.goBack();
       dispatch(handleUpdatePostContent(title, body, post.id));
+      history.goBack();
     } else {
-      history.push("/");
       dispatch(handleCreatePost(title, category, body));
+      history.push("/");
     }
   }
 
