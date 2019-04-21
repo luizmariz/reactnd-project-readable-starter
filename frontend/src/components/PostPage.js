@@ -5,6 +5,7 @@ import Comment from './Comment';
 import { FaRegTrashAlt, FaRegEdit } from 'react-icons/fa';
 import { handleDeletePost } from '../actions/posts';
 import { handleDeleteComment } from '../actions/shared';
+import PageNotFound from './PageNotFound';
 
 class PostPage extends Component {
 
@@ -53,6 +54,10 @@ class PostPage extends Component {
 
   render() {
     const { post, comments, authedUser } = this.props;
+
+    if (!post) {
+      return <PageNotFound />;
+    }
 
     return (
       <div className="center column">
