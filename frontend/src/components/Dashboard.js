@@ -64,6 +64,7 @@ function mapStateToProps({ posts, categories }, props) {
 	return {
     category: category ? category : "all",
     posts: Object.keys(posts)
+      .filter(key => !posts[key].deleted)
       .map(key => posts[key]),
 
     categories: Object.keys(categories)

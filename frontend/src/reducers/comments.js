@@ -2,7 +2,8 @@ import {
   RECEIVE_COMMENTS,
   CREATE_COMMENT,
   UPDATE_COMMENT_CONTENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  VOTE_COMMENT
 } from '../actions/comments';
 
 export default function posts (state = {}, action) {
@@ -32,9 +33,23 @@ export default function posts (state = {}, action) {
         }
       }
     case DELETE_COMMENT:
-      delete state[action.comment.parentId][action.comment.id];
       return {
-        ...state
+        ...state,
+        [action.comment.parentId]: {
+          ...state[action.comment.parentId],
+          [action.comment.id]: action.comment
+        }
+      }
+    case VOTE_COMMENT:
+      return {
+        ...state,
+        [action.comment.parentId]: {
+          ...state[action.comment.parentId],
+          [action.comment.id]: {
+            ...state[action.comment.parentId][action.comment.id],
+            voteScore: action.comment.voteScore
+          }
+        }
       }
     default:
       return state;

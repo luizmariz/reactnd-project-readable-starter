@@ -4,7 +4,7 @@ import Post from './Post';
 import Comment from './Comment';
 import { FaRegTrashAlt, FaRegEdit } from 'react-icons/fa';
 import { handleDeletePost } from '../actions/posts';
-import { handleDeleteComment } from '../actions/comments';
+import { handleDeleteComment } from '../actions/shared';
 
 class PostPage extends Component {
 
@@ -117,6 +117,7 @@ function mapStateToProps({ comments, posts, authedUser }, props) {
     post: posts[post_id],
     comments: comments[post_id]
       ? Object.keys(comments[post_id])
+          .filter(key => !comments[post_id][key].deleted)
           .map(key => comments[post_id][key])
           .sort((a,b) => b.voteScore - a.voteScore)
       : [],

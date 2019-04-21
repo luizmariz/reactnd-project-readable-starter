@@ -3,7 +3,8 @@ import {
   CREATE_POST,
   UPDATE_POST_COMMENT_COUNTER,
   UPDATE_POST_CONTENT,
-  DELETE_POST
+  DELETE_POST,
+  VOTE_POST
 } from '../actions/posts';
 
 export default function posts (state = {}, action) {
@@ -23,7 +24,9 @@ export default function posts (state = {}, action) {
         ...state,
         [action.postId]: {
           ...state[action.postId],
-          commentCount: state[action.postId].commentCount+1
+          commentCount: action.bool
+            ? state[action.postId].commentCount+1
+            : state[action.postId].commentCount-1
         }
       }
     case UPDATE_POST_CONTENT:
@@ -36,10 +39,18 @@ export default function posts (state = {}, action) {
         }
       }
     case DELETE_POST:
-      delete state[action.post.id];
       return {
-        ...state
+        ...state,
+        [action.post.id]: action.post
       };
+    case VOTE_POST:
+      return {
+        ...state,
+        [action.post.id]: {
+          ...state[action.post.id],
+          voteScore: action.post.voteScore
+        }
+      }
     default:
       return state;
   }

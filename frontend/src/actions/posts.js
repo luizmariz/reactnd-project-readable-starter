@@ -1,10 +1,11 @@
-import { newPost, updatePost, deletePostById } from '../utils/API';
+import { newPost, updatePost, deletePostById, votePostById } from '../utils/API';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST_COMMENT_COUNTER = 'UPDATE_POST_COMMENT_COUNTER';
 export const UPDATE_POST_CONTENT = 'UPDATE_POST_CONTENT';
 export const DELETE_POST = 'DELETE_POST';
+export const VOTE_POST = 'VOTE_POST';
 
 export function receivePosts (posts) {
   return {
@@ -20,10 +21,11 @@ export function createPost (post) {
   }
 }
 
-export function updatePostCommentCounter (postId) {
+export function updatePostCommentCounter (postId, bool) {
   return {
     type: UPDATE_POST_COMMENT_COUNTER,
-    postId
+    postId,
+    bool
   }
 }
 
@@ -37,6 +39,13 @@ export function updatePostContent (post) {
 export function deletePost (post) {
   return {
     type: DELETE_POST,
+    post
+  }
+}
+
+export function votePost (post) {
+  return {
+    type: VOTE_POST,
     post
   }
 }
@@ -61,5 +70,12 @@ export function handleDeletePost (id) {
   return (dispatch) => {
     return deletePostById(id)
       .then(post => dispatch(deletePost(post)));
+  }
+}
+
+export function handleVotePost (string, id) {
+  return (dispatch) => {
+    return votePostById(string, id)
+      .then(post => dispatch(votePost(post)));
   }
 }

@@ -70,10 +70,11 @@ class HandleComment extends Component {
 
 function mapStateToProps({ comments }, props) {
   const { parent_id, comment_id } = props.match.params;
+  console.log(comments, parent_id)
 
   return {
     parent_id,
-    comment: comments[parent_id][comment_id]
+    comment: comments[parent_id]
       ? comments[parent_id][comment_id]
       : null,
   }

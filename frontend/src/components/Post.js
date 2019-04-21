@@ -3,35 +3,25 @@ import { formatDate } from '../utils/helpers';
 import { FaArrowUp, FaArrowDown, FaRegCommentAlt } from 'react-icons/fa';
 import { exact, string, number, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { handleVotePost } from '../actions/posts';
 
 class Post extends Component {
-  state = {
-    upVoted: false,
-    downVoted: false,
-  }
 
   handleUpVote = e => {
     e.preventDefault();
 
-    const { upVoted } = this.state;
+    const { dispatch, post } = this.props;
 
-    if (!upVoted) {
-      this.setState(() => ({
-        upVoted: true
-      }));
-    }
+    dispatch(handleVotePost("upVote", post.id));
   }
 
   handleDownVote = e => {
     e.preventDefault();
 
-    const { downVoted } = this.state;
+    const { dispatch, post } = this.props;
 
-    if (!downVoted) {
-      this.setState(() => ({
-        downVoted: true
-      }));
-    }
+    dispatch(handleVotePost("downVote", post.id));
   }
 
   render() {
@@ -76,4 +66,4 @@ Post.propTypes = {
   }),
 };
 
-export default Post;
+export default connect()(Post);

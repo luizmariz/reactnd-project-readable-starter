@@ -1,35 +1,25 @@
 import React, { Component } from 'react';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { string, bool, number, exact } from 'prop-types';
+import { connect } from 'react-redux';
+import { handleVoteComment } from '../actions/comments';
 
 class Comment extends Component {
-  state = {
-    upVoted: false,
-    downVoted: false,
-  }
 
   handleUpVote = e => {
     e.preventDefault();
 
-    const { upVoted } = this.state;
+    const { dispatch, comment } = this.props;
 
-    if (!upVoted) {
-      this.setState(() => ({
-        upVoted: true
-      }));
-    }
+    dispatch(handleVoteComment("upVote", comment.id));
   }
 
   handleDownVote = e => {
     e.preventDefault();
 
-    const { downVoted } = this.state;
+    const { dispatch, comment } = this.props;
 
-    if (!downVoted) {
-      this.setState(() => ({
-        downVoted: true
-      }));
-    }
+    dispatch(handleVoteComment("downVote", comment.id));
   }
 
   render() {
@@ -69,4 +59,4 @@ Comment.propTypes = {
   }),
 };
 
-export default Comment;
+export default connect()(Comment);

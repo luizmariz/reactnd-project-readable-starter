@@ -68,7 +68,7 @@ export const newPost = (title, body, author, category ) =>
   }).then(res => res.json());
 
 // Use upVote or downVote
-export const votePost = ( string, id ) =>
+export const votePostById = ( string, id ) =>
   fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
@@ -126,7 +126,7 @@ export const comment = ( body, author, parentId ) =>
   }).then(res => res.json());
 
 // Use upVote or downVote
-export const voteComment = ( string, id ) =>
+export const voteCommentById = ( string, id ) =>
   fetch(`${api}/comments/${id}`, {
     method: 'POST',
     headers: {
