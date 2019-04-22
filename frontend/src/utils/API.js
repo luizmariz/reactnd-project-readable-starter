@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4';
 
 const api = 'http://localhost:3001';
-const token = Math.random().toString(36).substr(-8);
+const token = 'its-a-token';
 
 const headers = {
   'Accept': 'application/json',

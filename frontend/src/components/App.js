@@ -11,7 +11,7 @@ import HandleComment from './HandleComment';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.handleData();
   }
 
   render() {
@@ -44,4 +44,12 @@ function mapStateToProps ({ authedUser, categories }) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps (dispatch) {
+  return {
+    handleData: () => {
+      dispatch(handleInitialData())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -21,7 +21,7 @@ const Nav = (props) => {
         <li>
           <NavLink to={`/${category}`} exact activeClassName='active'>
             {props.categories.includes(category)
-              ? category.replace(category[0], category[0].toUpperCase()) 
+              ? category.replace(category[0], category[0].toUpperCase())
               : ''
             }
           </NavLink>

@@ -20,9 +20,9 @@ class Login extends Component {
     e.preventDefault();
 
     const { text } = this.state;
-    const { dispatch } = this.props;
+    const { login } = this.props;
 
-    dispatch(setAuthedUser(text));
+    login(text);
   }
 
   render() {
@@ -53,4 +53,16 @@ class Login extends Component {
   }
 }
 
-export default connect()(Login);
+function mapDispatchToProps (dispatch) {
+  return {
+    login: text => {
+      dispatch(setAuthedUser(text))
+    }
+  }
+}
+
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -26,13 +26,13 @@ class HandlePost extends Component {
     e.preventDefault();
 
     const { title, category, body } = this.state;
-    const { dispatch, history, post } = this.props;
+    const { updatePostContent,createPost , history, post } = this.props;
 
     if (post) {
-      dispatch(handleUpdatePostContent(title, body, post.id));
+      updatePostContent(title, body, post.id);
       history.goBack();
     } else {
-      dispatch(handleCreatePost(title, category, body));
+      createPost(title, category, body);
       history.push("/");
     }
   }
@@ -116,4 +116,15 @@ function mapStateToProps({ categories, posts }, props) {
   }
 }
 
-export default connect(mapStateToProps)(HandlePost);
+function mapDispatchToProps (dispatch) {
+  return {
+    updatePostContent: (title, body, id) => {
+      dispatch(handleUpdatePostContent(title, body, id))
+    },
+    createPost: (title, category, body) => {
+      dispatch(handleCreatePost(title, category, body))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HandlePost);

@@ -9,17 +9,17 @@ class Comment extends Component {
   handleUpVote = e => {
     e.preventDefault();
 
-    const { dispatch, comment } = this.props;
+    const { upVote, comment } = this.props;
 
-    dispatch(handleVoteComment("upVote", comment.id));
+    upVote(comment.id);
   }
 
   handleDownVote = e => {
     e.preventDefault();
 
-    const { dispatch, comment } = this.props;
+    const { downVote, comment } = this.props;
 
-    dispatch(handleVoteComment("downVote", comment.id));
+    downVote(comment.id);
   }
 
   render() {
@@ -59,4 +59,19 @@ Comment.propTypes = {
   }),
 };
 
-export default connect()(Comment);
+function mapDispatchToProps (dispatch) {
+  return {
+    upVote: id => {
+      dispatch(handleVoteComment("upVote", id))
+    },
+    downVote: id => {
+      dispatch(handleVoteComment("downVote", id))
+    }
+  }
+}
+
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comment);

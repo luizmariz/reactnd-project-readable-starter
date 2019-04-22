@@ -19,12 +19,12 @@ class HandleComment extends Component {
     e.preventDefault();
 
     const { body } = this.state;
-    const { dispatch, history, parent_id, comment} = this.props;
+    const { updateCommentContent, createComment, history, parent_id, comment} = this.props;
 
     if (comment) {
-      dispatch(handleUpdateCommentContent(body, comment.id))
+      updateCommentContent(body, comment.id);
     } else {
-      dispatch(handleCreateComment(parent_id, body));
+      createComment(parent_id, body);
     }
 
     history.goBack();
@@ -80,4 +80,15 @@ function mapStateToProps({ comments }, props) {
   }
 }
 
-export default connect(mapStateToProps)(HandleComment);
+function mapDispatchToProps (dispatch) {
+  return {
+    updateCommentContent: (body, id) => {
+      dispatch(handleUpdateCommentContent(body, id))
+    },
+    createComment: (parentId, body) => {
+      dispatch(handleCreateComment(parentId, body))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HandleComment);

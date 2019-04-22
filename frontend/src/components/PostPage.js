@@ -25,12 +25,12 @@ class PostPage extends Component {
     history.push(`${post.id}/edit`);
   }
 
-  deletePost =e => {
+  deletePost = e => {
     e.preventDefault();
 
-    const { post, history, dispatch } = this.props;
+    const { post, history, deletePost} = this.props;
 
-    dispatch(handleDeletePost(post.id));
+    deletePost(post.id);
 
     history.push('/');
   }
@@ -46,9 +46,9 @@ class PostPage extends Component {
   deleteComment = (e, id) => {
     e.preventDefault();
 
-    const { dispatch } = this.props;
+    const { deleteComment } = this.props;
 
-    dispatch(handleDeleteComment(id));
+    deleteComment(id);
 
   }
 
@@ -129,4 +129,15 @@ function mapStateToProps({ comments, posts, authedUser }, props) {
   }
 }
 
-export default connect(mapStateToProps)(PostPage);
+function mapDispatchToProps (dispatch) {
+  return {
+    deletePost: id => {
+      dispatch(handleDeletePost(id))
+    },
+    deleteComment: id => {
+      dispatch(handleDeleteComment(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostPage);

@@ -11,17 +11,17 @@ class Post extends Component {
   handleUpVote = e => {
     e.preventDefault();
 
-    const { dispatch, post } = this.props;
+    const { post, upVote } = this.props;
 
-    dispatch(handleVotePost("upVote", post.id));
+    upVote(post.id);
   }
 
   handleDownVote = e => {
     e.preventDefault();
 
-    const { dispatch, post } = this.props;
+    const { post, downVote } = this.props;
 
-    dispatch(handleVotePost("downVote", post.id));
+    downVote(post.id);
   }
 
   render() {
@@ -66,4 +66,19 @@ Post.propTypes = {
   }),
 };
 
-export default connect()(Post);
+function mapDispatchToProps (dispatch) {
+  return {
+    upVote: id => {
+      dispatch(handleVotePost("upVote", id))
+    },
+    downVote: id => {
+      dispatch(handleVotePost("downVote", id))
+    }
+  }
+}
+
+function mapStateToProps (state) {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
